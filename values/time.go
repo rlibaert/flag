@@ -47,38 +47,36 @@ func TimeSliceVar(p *[]time.Time, sep string, layout string) flag.Value {
 	return GenericSliceVar(p, sep, parseTime(layout), formatTime(layout))
 }
 
-func formatDuration(d time.Duration) string { return d.String() }
-
 // Duration declares a [flag.Value] for a single [time.Duration] value.
 // The actual value type is [time.Duration].
 func Duration() flag.Value {
-	return Generic(time.ParseDuration, formatDuration)
+	return Generic(time.ParseDuration, time.Duration.String)
 }
 
 // DurationVar is like [Duration] but stores the value in p.
 func DurationVar(p *time.Duration) flag.Value {
-	return GenericVar(p, time.ParseDuration, formatDuration)
+	return GenericVar(p, time.ParseDuration, time.Duration.String)
 }
 
 // DurationList declares a list-style [flag.Value] for multiple [time.Duration] values.
 // The actual value type is [][time.Duration].
 func DurationList() flag.Value {
-	return GenericList(time.ParseDuration, formatDuration)
+	return GenericList(time.ParseDuration, time.Duration.String)
 }
 
 // DurationListVar is like [DurationList] but stores the values in p.
 func DurationListVar(p *[]time.Duration) flag.Value {
-	return GenericListVar(p, time.ParseDuration, formatDuration)
+	return GenericListVar(p, time.ParseDuration, time.Duration.String)
 }
 
 // DurationSlice declares a slice-style [flag.Value] for multiple [time.Duration] values.
 // The input strings are split around sep before parsing.
 // The actual value type is [][time.Duration].
 func DurationSlice(sep string) flag.Value {
-	return GenericSlice(sep, time.ParseDuration, formatDuration)
+	return GenericSlice(sep, time.ParseDuration, time.Duration.String)
 }
 
 // DurationSliceVar is like [DurationSlice] but stores the values in p.
 func DurationSliceVar(p *[]time.Duration, sep string) flag.Value {
-	return GenericSliceVar(p, sep, time.ParseDuration, formatDuration)
+	return GenericSliceVar(p, sep, time.ParseDuration, time.Duration.String)
 }
